@@ -2,10 +2,10 @@ name: Docker
 
 on:
   push:
-    branches: [ nix-2.4 ]
+    branches: [ master ]
     tags: [ 'v*.**' ]
   pull_request:
-    branches: [ nix-2.4 ]
+    branches: [ master ]
 
 env:
   REGISTRY: ghcr.io
