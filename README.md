@@ -1,13 +1,20 @@
 This image contains an installation of the [Nix package manager](https://nixos.org/nix/).
 
+**Forked** by @fpletz with some experimental changes. Expect rebases.
+
 Use this build to create your own customized images as follows:
 
-    FROM nixos/nix
+    FROM ghcr.io/fpletz/nix
 
     RUN nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
     RUN nix-channel --update
 
     RUN nix-build -A pythonFull '<nixpkgs>'
+
+### Available Tags
+
+  * `ghcr.io/fpletz/nix:latest`: Latest tagged release
+  * `ghcr.io/fpletz/nix:master`: Latest build from master
 
 ### Limitations
 
