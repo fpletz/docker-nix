@@ -7,13 +7,12 @@ RUN apk add --no-cache --update openssl git \
   && echo hosts: files dns > /etc/nsswitch.conf
 
 # Download Nix and install it into the system.
-ARG NIX_VERSION=2.5.0
+ARG NIX_VERSION=2.5.1
 RUN wget https://nixos.org/releases/nix/nix-${NIX_VERSION}/nix-${NIX_VERSION}-$(uname -m)-linux.tar.xz \
   && tar xf nix-${NIX_VERSION}-$(uname -m)-linux.tar.xz \
   && addgroup -g 30000 -S nixbld \
   && for i in $(seq 1 30); do adduser -S -D -h /var/empty -g "Nix build user $i" -u $((30000 + i)) -G nixbld nixbld$i ; done \
   && mkdir -m 0755 /etc/nix \
-  && echo 'filter-syscalls = false' > /etc/nix/nix.conf \
   && echo 'sandbox = false' >> /etc/nix/nix.conf \
   && echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf \
   && mkdir -m 0755 /nix && USER=root sh nix-${NIX_VERSION}-$(uname -m)-linux/install \
